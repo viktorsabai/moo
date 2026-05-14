@@ -5,8 +5,8 @@ export type MobileSceneData = {
   kicker: string;
   title: string;
   body: string;
-  signals: string[];
   tone: string;
+  signals: string[];
 };
 
 export type MobileExperienceProps = {
