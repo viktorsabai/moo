@@ -1,12 +1,18 @@
+"use client";
+
+import type { CSSProperties } from "react";
+
 import { mooContacts } from "../data/contacts";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 import { MooLogo } from "./MooLogo";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
+  const { ref, sectionClass } = useScrollReveal<HTMLElement>(0.12);
 
   return (
-    <footer className="moo-site-footer">
-      <div className="moo-site-footer-card">
+    <footer className={`moo-site-footer moo-scroll-section${sectionClass}`} ref={ref}>
+      <div className="moo-site-footer-card moo-reveal" style={{ "--reveal-d": "0ms" } as CSSProperties}>
         <div className="moo-site-footer-glow" aria-hidden="true" />
 
         <div className="moo-site-footer-top">

@@ -1,14 +1,15 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 
 import { STORY_PHASES, type StoryPhaseId } from "../data/scroll-story";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 import { StoryPhoneScreen } from "./StoryPhoneScreen";
 
 export function ScrollStorySection() {
+  const { ref, sectionClass } = useScrollReveal<HTMLElement>(0.12);
   const [activeIndex, setActiveIndex] = useState(0);
   const [cycleToken, setCycleToken] = useState(0);
-  const sectionRef = useRef<HTMLDivElement | null>(null);
   const railRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -38,22 +39,33 @@ export function ScrollStorySection() {
   return (
     <section
       aria-label="Как это работает"
-      className="story-section"
+      className={`story-section moo-scroll-section${sectionClass}`}
       id="demo"
-      ref={sectionRef}
+      ref={ref}
     >
       <div className="story-viewport">
         <div className="story-stage-grid">
           <header className="story-copy">
-            <p className="story-kicker">Пользовательский опыт</p>
-            <h2 className="story-section-label">
+            <p
+              className="story-kicker moo-reveal"
+              style={{ "--reveal-d": "0ms" } as CSSProperties}
+            >
+              Пользовательский опыт
+            </p>
+            <h2
+              className="story-section-label moo-reveal"
+              style={{ "--reveal-d": "80ms" } as CSSProperties}
+            >
               Один Telegram Mini App.
               <br />
               <em>Весь ресторан внутри.</em>
             </h2>
           </header>
 
-          <div className="story-phone-column">
+          <div
+            className="story-phone-column moo-reveal"
+            style={{ "--reveal-d": "160ms" } as CSSProperties}
+          >
             <nav
               aria-label="Этапы демо"
               className="story-rail story-rail--phone"
@@ -80,7 +92,7 @@ export function ScrollStorySection() {
                   );
                 })}
               </div>
-              <p className="story-rail-caption" key={activePhase}>
+              <p className="story-rail-caption story-rail-caption--mobile" key={activePhase}>
                 {activeStory.label}
               </p>
             </nav>
@@ -102,6 +114,17 @@ export function ScrollStorySection() {
               </div>
             </div>
           </div>
+
+          <aside className="story-aside" key={activePhase}>
+            <span className="story-aside-act">{activeStory.actLabel}</span>
+            <p className="story-aside-step">
+              {String(activeStory.step).padStart(2, "0")}
+              <span> / {String(STORY_PHASES.length).padStart(2, "0")}</span>
+            </p>
+            <h3 className="story-aside-title">{activeStory.label}</h3>
+            <p className="story-aside-story">{activeStory.story}</p>
+            <p className="story-aside-detail">{activeStory.detail}</p>
+          </aside>
         </div>
       </div>
     </section>

@@ -10,6 +10,7 @@ export type FaqItem = {
 export type FaqGroup = {
   id: string;
   label: string;
+  shortLabel: string;
   emoji: string;
   items: FaqItem[];
 };
@@ -18,6 +19,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
   {
     id: "orders",
     label: "Заказ и оплата",
+    shortLabel: "Заказы",
     emoji: "🧾",
     items: [
       {
@@ -67,6 +69,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
   {
     id: "menu",
     label: "Меню и доставка",
+    shortLabel: "Меню",
     emoji: "🍜",
     items: [
       {
@@ -119,6 +122,7 @@ export const FAQ_GROUPS: FaqGroup[] = [
   {
     id: "launch",
     label: "Запуск и управление",
+    shortLabel: "Запуск",
     emoji: "🚀",
     items: [
       {

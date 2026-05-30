@@ -1,59 +1,43 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import type { CSSProperties } from "react";
 
-import { mooContacts } from "../data/contacts";
+import { useScrollReveal } from "../hooks/useScrollReveal";
+import { MooCtaGroup } from "./MooCtaGroup";
 
 export function HeroSection() {
-  const sectionRef = useRef<HTMLElement | null>(null);
-  const [inView, setInView] = useState(false);
-
-  useEffect(() => {
-    const node = sectionRef.current;
-    if (!node) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setInView(true);
-            observer.disconnect();
-          }
-        }
-      },
-      { threshold: 0.35 },
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
+  const { ref, sectionClass } = useScrollReveal<HTMLElement>(0.35);
 
   return (
     <section
       aria-labelledby="hero-title"
-      className={`moo-hero-section${inView ? " is-in" : ""}`}
+      className={`moo-hero-section moo-scroll-section${sectionClass}`}
       id="top"
-      ref={sectionRef}
+      ref={ref}
     >
-      <span className="moo-hero-kicker moo-hero-reveal">Telegram для ресторанов</span>
-      <h1 className="moo-hero-title moo-hero-reveal" id="hero-title">
+      <span
+        className="moo-hero-kicker moo-reveal"
+        style={{ "--reveal-d": "0ms" } as CSSProperties}
+      >
+        Telegram для ресторанов
+      </span>
+      <h1
+        className="moo-hero-title moo-reveal"
+        id="hero-title"
+        style={{ "--reveal-d": "80ms" } as CSSProperties}
+      >
         Ваш ресторан — в&nbsp;смартфоне каждого гостя
       </h1>
-      <p className="moo-hero-sub moo-hero-reveal">
+      <p className="moo-hero-sub moo-reveal" style={{ "--reveal-d": "160ms" } as CSSProperties}>
         Заказы, меню и&nbsp;постоянные гости — без&nbsp;комиссии агрегаторов
         и&nbsp;без&nbsp;отдельных приложений. Запуск за&nbsp;48&nbsp;часов.
       </p>
-      <div className="moo-hero-actions">
-        <a
-          className="moo-btn-primary moo-hero-primary moo-hero-reveal"
-          href={mooContacts.founder}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Начать работу
-        </a>
-        <a className="moo-btn-secondary moo-hero-secondary moo-hero-reveal" href="#demo">
-          Посмотреть, как работает
-        </a>
-      </div>
+      <MooCtaGroup
+        className="moo-hero-actions-wrap"
+        revealClass="moo-reveal"
+        revealDelay="260ms"
+        variant="hero"
+      />
     </section>
   );
 }

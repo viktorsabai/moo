@@ -9,6 +9,7 @@ import {
   type CSSProperties,
 } from "react";
 import { currencySymbol, formatAmount, formatMoney } from "../lib/currency";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 import { AnimatedNumber } from "./AnimatedNumber";
 
 function usePulseOnChange(value: number) {
@@ -129,26 +130,7 @@ export const BusinessCalculator = memo(function BusinessCalculator() {
   const [orders, setOrders] = useState(320);
   const [avgCheckThb, setAvgCheckThb] = useState(600);
   const [commission, setCommission] = useState(25);
-  const [inView, setInView] = useState(false);
-  const panelRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const el = panelRef.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setInView(true);
-            observer.disconnect();
-          }
-        });
-      },
-      { threshold: 0.2 },
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
+  const { ref: panelRef, inView, sectionClass } = useScrollReveal<HTMLElement>(0.2);
 
   const model = useMemo(() => {
     const monthlyRevenue = orders * avgCheckThb;
@@ -171,21 +153,40 @@ export const BusinessCalculator = memo(function BusinessCalculator() {
   );
 
   return (
-    <section aria-labelledby="calc-title" className="moo-calc" id="calc">
+    <section
+      aria-labelledby="calc-title"
+      className={`moo-calc moo-scroll-section${sectionClass}`}
+      id="calc"
+      ref={panelRef}
+    >
       <div className="moo-calc-head">
         <div className="moo-calc-head-row">
           <div>
-            <p className="moo-section-label">Экономия</p>
-            <h2 id="calc-title">Сколько вы отдаёте агрегаторам</h2>
+            <p
+              className="moo-section-label moo-reveal"
+              style={{ "--reveal-d": "0ms" } as CSSProperties}
+            >
+              Экономия
+            </p>
+            <h2
+              className="moo-reveal"
+              id="calc-title"
+              style={{ "--reveal-d": "70ms" } as CSSProperties}
+            >
+              Сколько вы отдаёте агрегаторам
+            </h2>
           </div>
         </div>
-        <p className="moo-calc-lead">
+        <p
+          className="moo-calc-lead moo-reveal"
+          style={{ "--reveal-d": "140ms" } as CSSProperties}
+        >
           Передвиньте слайдеры — увидите, сколько остаётся у&nbsp;вас, когда гости
           заказывают напрямую.
         </p>
       </div>
 
-      <div className={`moo-calc-panel${inView ? " is-in" : ""}`} ref={panelRef}>
+      <div className={`moo-calc-panel${inView ? " is-in" : ""}`}>
         <div className="moo-calc-grid">
           <CalcSlider
             label="Заказов в месяц"

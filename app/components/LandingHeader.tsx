@@ -1,7 +1,8 @@
 "use client";
 
-import { mooContacts } from "../data/contacts";
 import { MooLogo } from "./MooLogo";
+import { LandingScrollProgress } from "./LandingScrollProgress";
+import { MooCtaGroup } from "./MooCtaGroup";
 
 export function LandingHeader() {
   return (
@@ -14,18 +15,13 @@ export function LandingHeader() {
         <nav aria-label="Навигация" className="moo-site-nav">
           <a href="#demo">Демо</a>
           <a href="#calc">Экономия</a>
+          <a href="#faq">FAQ</a>
           <a href="#contact">Запуск</a>
         </nav>
 
-        <a
-          className="moo-site-cta"
-          href={mooContacts.founder}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Начать
-        </a>
+        <MooCtaGroup variant="header" />
       </div>
+      <LandingScrollProgress />
     </header>
   );
 }
