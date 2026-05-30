@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-import { mooCta } from "../data/contacts";
-
 export const LANDING_STEPS = [
   { id: "top", label: "Старт", href: "#top" },
   { id: "demo", label: "Демо", href: "#demo" },
@@ -11,21 +9,6 @@ export const LANDING_STEPS = [
   { id: "faq", label: "FAQ", href: "#faq" },
   { id: "contact", label: "Запуск", href: "#contact" },
 ] as const;
-
-function TelegramPlane({ size = 14 }: { size?: number }) {
-  return (
-    <svg
-      aria-hidden="true"
-      className="moo-cta-plane"
-      fill="currentColor"
-      height={size}
-      viewBox="0 0 24 24"
-      width={size}
-    >
-      <path d="M21.5 4.3 2.9 11.5c-1.1.4-1.1 1.6 0 2l4.7 1.5 1.8 5.6c.2.6 1 .8 1.5.3l2.6-2.4 4.6 3.4c.6.4 1.4.1 1.6-.6L23 5.7c.2-1-.6-1.8-1.5-1.4z" />
-    </svg>
-  );
-}
 
 function getActiveStepIndex() {
   const probe = window.scrollY + window.innerHeight * 0.28;
@@ -105,19 +88,5 @@ export function LandingStepperNav({ activeIndex, fillPct }: StepperProps) {
         })}
       </div>
     </nav>
-  );
-}
-
-export function HeaderDemoLink() {
-  return (
-    <a
-      className="moo-header-demo-link"
-      href={mooCta.demoBot.href}
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      <TelegramPlane />
-      <span className="moo-header-demo-text">{mooCta.demoBot.short}</span>
-    </a>
   );
 }
