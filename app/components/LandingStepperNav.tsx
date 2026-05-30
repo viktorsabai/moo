@@ -42,7 +42,7 @@ function getActiveStepIndex() {
   return index;
 }
 
-export function LandingStepperNav() {
+export function useLandingStep() {
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
@@ -71,36 +71,40 @@ export function LandingStepperNav() {
   const fillPct =
     LANDING_STEPS.length <= 1 ? 0 : (activeIndex / (LANDING_STEPS.length - 1)) * 100;
 
-  const activeStep = LANDING_STEPS[activeIndex] ?? LANDING_STEPS[0]!;
+  return { activeIndex, fillPct };
+}
 
+type StepperProps = {
+  activeIndex: number;
+  fillPct: number;
+};
+
+/** Desktop: stepper with aligned dots + labels */
+export function LandingStepperNav({ activeIndex, fillPct }: StepperProps) {
   return (
-    <div className="moo-header-stepper-wrap">
-      <nav aria-label="Прогресс по лендингу" className="moo-stepper">
+    <nav aria-label="Прогресс по лендингу" className="moo-stepper">
+      <div className="moo-stepper-track">
         <div aria-hidden="true" className="moo-stepper-rail">
           <div className="moo-stepper-rail-fill" style={{ width: `${fillPct}%` }} />
         </div>
 
-        <ol className="moo-stepper-list">
-          {LANDING_STEPS.map((step, index) => {
-            const state =
-              index < activeIndex ? "is-done" : index === activeIndex ? "is-active" : "is-upcoming";
+        {LANDING_STEPS.map((step, index) => {
+          const state =
+            index < activeIndex ? "is-done" : index === activeIndex ? "is-active" : "is-upcoming";
 
-            return (
-              <li className={`moo-stepper-item ${state}`} key={step.id}>
-                <a className="moo-stepper-link" href={step.href}>
-                  <span className="moo-stepper-dot" />
-                  <span className="moo-stepper-label">{step.label}</span>
-                </a>
-              </li>
-            );
-          })}
-        </ol>
-      </nav>
-
-      <p aria-live="polite" className="moo-stepper-caption">
-        {activeStep.label}
-      </p>
-    </div>
+          return (
+            <a
+              className={`moo-stepper-step ${state}`}
+              href={step.href}
+              key={step.id}
+            >
+              <span className="moo-stepper-dot" />
+              <span className="moo-stepper-label">{step.label}</span>
+            </a>
+          );
+        })}
+      </div>
+    </nav>
   );
 }
 
