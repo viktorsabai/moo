@@ -1,16 +1,7 @@
-import type { ReactNode } from "react";
+import type { StorySection } from "../../data/story";
 
-export type MobileSceneData = {
-  id: string;
-  kicker: string;
-  title: string;
-  body: string;
-  tone: string;
-  signals: string[];
-};
+export type MobileSection = StorySection;
 
 export type MobileExperienceProps = {
-  phoneScreenKeys: string[];
-  phoneScreens: ReactNode[];
-  scenes: MobileSceneData[];
+  sections?: StorySection[];
 };

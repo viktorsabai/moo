@@ -1,34 +1,33 @@
-import type { MobileSceneData } from "./types";
-
-export function MobileProgress({
-  activeIndex,
-  onSelect,
-  scenes,
-}: {
+type Props = {
   activeIndex: number;
-  onSelect: (index: number) => void;
-  scenes: MobileSceneData[];
-}) {
-  return (
-    <nav className="mobile-progress" aria-label="MOO walkthrough progress">
-      <div className="mobile-progress-track">
-        {scenes.map((scene, index) => (
-          <button
-            aria-current={index === activeIndex ? "step" : undefined}
-            aria-label={scene.title}
-            className={index === activeIndex ? "is-active" : ""}
-            key={scene.id}
-            onClick={() => onSelect(index)}
-            type="button"
-          >
-            <span className="mobile-progress-index">
-              {String(index + 1).padStart(2, "0")}
-            </span>
+  total: number;
+};
 
-            <span className="mobile-progress-bar" />
-          </button>
-        ))}
-      </div>
-    </nav>
+export function MobileProgress({ activeIndex, total }: Props) {
+  const pct = total > 0 ? ((activeIndex + 1) / total) * 100 : 0;
+  return (
+    <div
+      className="mobile-progress"
+      style={{
+        position: "fixed",
+        top: 12,
+        left: 18,
+        right: 18,
+        height: 3,
+        borderRadius: 999,
+        background: "rgba(255,255,255,0.12)",
+        zIndex: 30,
+      }}
+      aria-hidden
+    >
+      <div
+        style={{
+          width: `${pct}%`,
+          height: "100%",
+          borderRadius: "inherit",
+          background: "linear-gradient(90deg, #978eff, #895eff)",
+        }}
+      />
+    </div>
   );
 }

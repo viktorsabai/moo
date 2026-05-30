@@ -1,0 +1,324 @@
+/* Interactive demo — sticky scrollytelling canvas */
+
+.mobile-scrolly {
+  position: relative;
+  background: #030306;
+}
+
+.mobile-scrolly-pin {
+  --scene-glow: rgba(129, 94, 255, 0.34);
+  position: sticky;
+  top: max(68px, calc(env(safe-area-inset-top) + 56px));
+  z-index: 5;
+  display: grid;
+  grid-template-rows: auto auto auto minmax(0, 1fr) auto auto;
+  gap: 10px;
+  height: calc(100svh - max(68px, calc(env(safe-area-inset-top) + 56px)));
+  padding: 6px 16px max(10px, env(safe-area-inset-bottom));
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(165deg, #020205 0%, #0a0813 55%, #020205 100%);
+}
+
+.mobile-scrolly-pin[data-tone="owner"] {
+  --scene-glow: rgba(101, 130, 255, 0.28);
+}
+
+.mobile-scrolly-pin[data-tone="crm"] {
+  --scene-glow: rgba(145, 113, 255, 0.36);
+}
+
+.mobile-scrolly-pin[data-tone="growth"] {
+  --scene-glow: rgba(128, 106, 255, 0.32);
+}
+
+.mobile-scrolly-pin[data-tone="analytics"] {
+  --scene-glow: rgba(150, 123, 255, 0.34);
+}
+
+.mobile-scrolly-mesh {
+  position: absolute;
+  inset: -20% -10%;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 88% 18%, var(--scene-glow), transparent 68%),
+    radial-gradient(ellipse 40% 35% at 10% 72%, rgba(101, 81, 255, 0.14), transparent 70%);
+  pointer-events: none;
+  animation: demoMeshDrift 9s ease-in-out infinite alternate;
+}
+
+.mobile-scrolly-pin > *:not(.mobile-scrolly-mesh) {
+  position: relative;
+  z-index: 1;
+}
+
+.mobile-scrolly-intro {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 0;
+}
+
+.mobile-scrolly-intro strong {
+  color: #fff;
+  font-size: 11px;
+  font-weight: var(--weight-extrabold);
+  letter-spacing: 0.18em;
+}
+
+.mobile-scrolly-intro span {
+  overflow: hidden;
+  color: rgba(255, 255, 255, 0.46);
+  font-size: 10px;
+  font-weight: var(--weight-medium);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mobile-scrolly-copy {
+  display: grid;
+  gap: 5px;
+  animation: demoCopyIn 0.42s ease both;
+}
+
+.mobile-scrolly-step {
+  color: rgba(201, 191, 255, 0.82);
+  font-size: 9px;
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.mobile-scrolly-copy h2 {
+  margin: 0;
+  color: #fff;
+  font-size: clamp(20px, 5.4vw, 26px);
+  font-weight: var(--weight-bold);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.mobile-scrolly-copy p {
+  margin: 0;
+  max-width: 36ch;
+  color: rgba(255, 255, 255, 0.56);
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.mobile-scrolly-callouts {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory;
+}
+
+.mobile-scrolly-callouts::-webkit-scrollbar {
+  display: none;
+}
+
+.mobile-scrolly-callout {
+  flex: 0 0 auto;
+  min-width: 118px;
+  max-width: 140px;
+  padding: 8px 10px;
+  display: grid;
+  gap: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  background: rgba(8, 8, 14, 0.72);
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  scroll-snap-align: start;
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.mobile-scrolly-callout.is-active {
+  border-color: rgba(151, 142, 255, 0.45);
+  background: rgba(20, 14, 40, 0.92);
+  transform: scale(1.02);
+}
+
+.mobile-scrolly-callout i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #978eff;
+  box-shadow: 0 0 10px rgba(151, 142, 255, 0.55);
+}
+
+.mobile-scrolly-callout span {
+  color: rgba(255, 255, 255, 0.46);
+  font-size: 7px;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.mobile-scrolly-callout strong {
+  color: #fff;
+  font-size: 10px;
+  font-weight: var(--weight-bold);
+  line-height: 1.15;
+}
+
+.mobile-scrolly-phone-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 0;
+}
+
+.mobile-scrolly-phone-glow {
+  position: absolute;
+  inset: 8% 12%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, var(--scene-glow), transparent 72%);
+  filter: blur(28px);
+  animation: demoMeshDrift 7s ease-in-out infinite alternate-reverse;
+  pointer-events: none;
+}
+
+.mobile-scrolly-phone-shell {
+  position: relative;
+  z-index: 2;
+  width: min(58vw, 220px);
+  animation: demoPhoneIn 0.5s ease both;
+}
+
+.mobile-scrolly-phone-shell .iphone-shell {
+  width: 100%;
+  animation: demoPhoneFloat 5.5s ease-in-out infinite alternate;
+}
+
+.mobile-scrolly-phone-shell .iphone-screen {
+  background: #eef3ff !important;
+}
+
+.mobile-scrolly-live-badge {
+  position: absolute;
+  top: 4%;
+  right: calc(50% - min(29vw, 110px));
+  z-index: 3;
+  padding: 4px 8px;
+  border-radius: 999px;
+  color: #7dffba;
+  background: rgba(8, 20, 14, 0.82);
+  border: 1px solid rgba(125, 255, 186, 0.28);
+  font-size: 8px;
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  animation: demoLivePulse 2.4s ease-in-out infinite;
+}
+
+.mobile-scrolly-nav {
+  display: flex;
+  gap: 4px;
+  padding: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.mobile-scrolly-nav button {
+  flex: 1;
+  min-height: 30px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.46);
+  font-size: 9px;
+  font-weight: var(--weight-semibold);
+  cursor: pointer;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+.mobile-scrolly-nav button.is-active {
+  color: #fff;
+  background: linear-gradient(120deg, rgba(101, 81, 255, 0.85), rgba(46, 143, 255, 0.75));
+  box-shadow: 0 8px 20px rgba(75, 70, 205, 0.28);
+}
+
+.mobile-scrolly-hint {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.28);
+  font-size: 9px;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.06em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.mobile-scrolly-steps {
+  position: relative;
+  z-index: 1;
+}
+
+.mobile-scrolly-step {
+  height: 100svh;
+}
+
+@keyframes demoCopyIn {
+  from {
+    opacity: 0.6;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes demoPhoneIn {
+  from {
+    opacity: 0.7;
+    transform: scale(0.96) translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes demoPhoneFloat {
+  to {
+    translate: 0 -5px;
+  }
+}
+
+@keyframes demoMeshDrift {
+  50% {
+    transform: scale(1.04) translate(2%, -1%);
+    opacity: 0.85;
+  }
+}
+
+@keyframes demoLivePulse {
+  50% {
+    box-shadow: 0 0 16px rgba(125, 255, 186, 0.35);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-scrolly-mesh,
+  .mobile-scrolly-phone-glow,
+  .mobile-scrolly-phone-shell,
+  .mobile-scrolly-phone-shell .iphone-shell,
+  .mobile-scrolly-live-badge,
+  .mobile-scrolly-copy {
+    animation: none !important;
+  }
+}

@@ -1,18 +1,19 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import "./components/landing.css";
+import "./components/scroll-story.css";
 
 export const metadata: Metadata = {
-  title: "MOO | Telegram Restaurant Growth OS",
+  title: "MOO | Ресторан в Telegram",
   description:
-    "MOO turns Telegram Mini App commerce into an owned restaurant growth channel with Guest CRM, AI recommendations, and retention loops.",
-  keywords: [
-    "restaurant",
-    "Telegram Mini App",
-    "Guest CRM",
-    "AI",
-    "retention",
-    "restaurant growth",
-  ],
+    "Заказы и постоянные гости без комиссии агрегаторов. Запуск за 48 часов — @topka_demo_bot",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -21,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ru">
       <body>{children}</body>
     </html>
   );

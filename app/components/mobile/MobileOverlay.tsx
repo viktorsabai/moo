@@ -1,23 +1,11 @@
-import type { MobileSceneData } from "./types";
+type Props = {
+  label: string;
+};
 
-export function MobileOverlay({
-  activeIndex,
-  scene,
-}: {
-  activeIndex: number;
-  scene: MobileSceneData;
-}) {
+export function MobileOverlay({ label }: Props) {
   return (
-    <aside className="mobile-overlay" data-tone={scene.tone}>
-      <div className="mobile-overlay-head">
-        <span>{scene.kicker}</span>
-        <b>{String(activeIndex + 1).padStart(2, "0")}</b>
-      </div>
-
-      <div className="mobile-editorial-copy">
-        <h2>{scene.title}</h2>
-        <p>{scene.body}</p>
-      </div>
-    </aside>
+    <div className="mobile-overlay-root" aria-hidden>
+      <div className="mobile-overlay-chip">{label}</div>
+    </div>
   );
 }

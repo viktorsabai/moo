@@ -1,0 +1,831 @@
+@media (max-width: 1024px) {
+  .mobile-section-phone {
+    border-radius: 34px;
+    background:
+      radial-gradient(76% 78% at 50% 36%, rgba(151, 120, 255, 0.24), transparent 72%),
+      linear-gradient(160deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.018));
+    box-shadow: 0 25px 80px rgba(0, 0, 0, 0.32);
+  }
+
+  .mobile-section-phone .iphone-shell {
+    width: min(64vw, 248px);
+    transform-origin: 50% 90%;
+    animation: mobilePhoneFloat 6.8s ease-in-out infinite alternate;
+  }
+
+  .mobile-section-phone .iphone-screen {
+    background: #eef3ff !important;
+  }
+
+  .mobile-product-section[data-layout="left-split"] .mobile-section-copy {
+    justify-self: start;
+    justify-items: start;
+    text-align: left;
+  }
+
+  .mobile-product-section[data-layout="center-focus"] .mobile-section-copy,
+  .mobile-product-section[data-layout="roi-focus"] .mobile-section-copy {
+    justify-self: center;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .mobile-product-section[data-layout="center-focus"] .mobile-scene-facts,
+  .mobile-product-section[data-layout="roi-focus"] .mobile-scene-facts {
+    justify-content: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-phone-aura,
+  .mobile-section-phone .iphone-shell,
+  .product-phone-miniapp-head,
+  .product-phone-cart,
+  .product-phone-action {
+    animation: none !important;
+  }
+}
+
+@keyframes mobilePhoneFloat {
+  to {
+    translate: 0 -7px;
+  }
+}
+
+.iphone-shell {
+  position: relative;
+  padding: 7px;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 39px;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.04)), #08080d;
+  box-shadow:
+    0 32px 72px rgba(0, 0, 0, 0.94),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.iphone-island {
+  position: absolute;
+  top: 13px;
+  left: 50%;
+  z-index: 6;
+  width: 66px;
+  height: 19px;
+  border-radius: 999px;
+  background: #050509;
+  transform: translateX(-50%);
+}
+
+.iphone-screen {
+  position: relative;
+  aspect-ratio: 9 / 19.5;
+  overflow: hidden;
+  border-radius: 32px;
+  background: #f4f5f8;
+  pointer-events: auto;
+}
+
+.phone-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 1;
+  overflow-y: auto;
+  pointer-events: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.product-phone-body {
+  display: grid;
+  gap: 8px;
+}
+
+.product-phone-mockup {
+  position: relative;
+  color: #111323;
+  background:
+    radial-gradient(circle at 86% 1%, rgba(112, 101, 255, 0.3), transparent 27%),
+    linear-gradient(180deg, #f4f7ff 0%, #e8edfb 100%);
+}
+
+.product-phone-glow {
+  position: absolute;
+  top: -64px;
+  right: -48px;
+  width: 168px;
+  height: 168px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(142, 122, 255, 0.72), transparent 72%);
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+.product-phone-success .product-phone-topbar b {
+  color: #167944;
+  background: rgba(36, 191, 110, 0.13);
+}
+
+.product-phone-mockup > *:not(.product-phone-glow) {
+  position: relative;
+  z-index: 2;
+}
+
+.product-phone-topbar {
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+  min-height: 18px;
+  margin-bottom: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: rgba(20, 25, 46, 0.52);
+  font-size: 9px;
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.08em;
+}
+
+.product-phone-topbar b {
+  padding: 4px 6px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  color: #167944;
+  background: rgba(36, 191, 110, 0.13);
+  font-size: 6px;
+  font-weight: var(--weight-bold);
+}
+
+.product-phone-topbar b::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  margin-right: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  animation: productPhonePulse 1.9s ease-in-out infinite;
+}
+
+.product-phone-miniapp {
+  overflow: hidden;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 14px 34px rgba(42, 35, 92, 0.12);
+}
+
+.product-phone-miniapp-head {
+  min-height: 34px;
+  padding: 0 11px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: rgba(255, 255, 255, 0.72);
+  background:
+    radial-gradient(circle at 85% 0%, rgba(255, 255, 255, 0.22), transparent 42%),
+    linear-gradient(125deg, #2c8dff, #7861ff);
+  background-size: 140% 100%;
+  font-size: 9px;
+  font-weight: var(--weight-semibold);
+  animation: productMiniappShift 5.2s ease-in-out infinite alternate;
+}
+
+.product-phone-miniapp-head b {
+  color: #fff;
+  font-size: 8px;
+  letter-spacing: 0.08em;
+}
+
+.product-phone-heading {
+  display: grid;
+  gap: 5px;
+  padding: 11px;
+}
+
+.product-phone-heading small,
+.product-phone-offer small {
+  color: #7562ee;
+  font-size: 6px;
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.product-phone-heading strong {
+  color: #111322;
+  font-size: 18px;
+  font-weight: var(--weight-bold);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+}
+
+.product-phone-heading p {
+  margin: 0;
+  color: rgba(20, 25, 46, 0.58);
+  font-size: 8px;
+  line-height: 1.35;
+}
+
+.product-phone-stage {
+  position: relative;
+  z-index: 4;
+  display: grid;
+  gap: 8px;
+  margin-top: 9px;
+  padding: 0 2px;
+}
+
+.product-phone-categories {
+  display: flex;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.product-phone-categories span,
+.product-phone-guest-tags span {
+  min-height: 20px;
+  padding: 0 7px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  color: #4d3ccc;
+  background: rgba(107, 88, 255, 0.12);
+  font-size: 6.5px;
+  font-weight: var(--weight-bold);
+  white-space: nowrap;
+}
+
+.product-phone-menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 5px;
+}
+
+.product-phone-menu-grid span,
+.product-phone-guest,
+.product-phone-cart,
+.product-phone-action {
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 8px 18px rgba(35, 31, 75, 0.08);
+}
+
+.product-phone-menu-grid span {
+  min-height: 62px;
+  padding: 9px;
+  display: grid;
+  align-content: end;
+  gap: 5px;
+  background: linear-gradient(180deg, rgba(255, 223, 160, 0.7), rgba(255, 255, 255, 0.92));
+}
+
+.product-phone-menu-grid span:last-child {
+  background: linear-gradient(180deg, rgba(194, 241, 255, 0.72), rgba(255, 255, 255, 0.94));
+}
+
+.product-phone-menu-grid b,
+.product-phone-dish span {
+  color: #111322;
+  font-size: 9px;
+  font-weight: var(--weight-bold);
+  line-height: 1.1;
+}
+
+.product-phone-menu-grid em {
+  color: rgba(20, 25, 46, 0.52);
+  font-size: 8px;
+  font-style: normal;
+  font-weight: var(--weight-semibold);
+}
+
+.product-phone-cart {
+  min-height: 34px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  background: linear-gradient(120deg, #10142d, #4130bc);
+  animation: productCartBreathe 3.2s ease-in-out infinite;
+}
+
+.product-phone-cart span {
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 8px;
+}
+
+.product-phone-cart strong {
+  color: #fff;
+  font-size: 9px;
+  font-weight: var(--weight-bold);
+}
+
+.product-phone-success .product-phone-glow {
+  background: radial-gradient(circle, rgba(125, 255, 186, 0.42), transparent 72%);
+}
+
+.product-phone-order-live,
+.product-phone-owner-list,
+.product-phone-owner-actions,
+.product-phone-guest,
+.product-phone-guest-stats,
+.product-phone-guest-tags,
+.product-phone-plans,
+.product-phone-recurring,
+.product-phone-offer,
+.product-phone-chart,
+.product-phone-analytics-kpis,
+.product-phone-cart,
+.product-phone-action {
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 8px 18px rgba(35, 31, 75, 0.08);
+}
+
+.product-phone-order-live {
+  display: grid;
+  grid-template-columns: 8px 1fr auto;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 7px 9px;
+  background: rgba(101, 81, 255, 0.1);
+}
+
+.product-phone-order-live i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #6551ff;
+  box-shadow: 0 0 12px rgba(101, 81, 255, 0.72);
+  animation: productPhonePulse 1.9s ease-in-out infinite;
+}
+
+.product-phone-order-live span {
+  color: rgba(20, 25, 46, 0.62);
+  font-size: 7px;
+}
+
+.product-phone-order-live b {
+  color: #4331c8;
+  font-size: 8px;
+  font-weight: var(--weight-bold);
+}
+
+.product-phone-owner-list {
+  display: grid;
+  gap: 0;
+  padding: 4px 0;
+  overflow: hidden;
+}
+
+.product-phone-owner-list div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 30px;
+  padding: 0 10px;
+}
+
+.product-phone-owner-list div + div {
+  border-top: 1px solid rgba(17, 18, 40, 0.06);
+}
+
+.product-phone-owner-list span {
+  color: #111322;
+  font-size: 8px;
+  font-weight: var(--weight-semibold);
+}
+
+.product-phone-owner-list b {
+  font-size: 7px;
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.product-phone-owner-list b.is-on {
+  color: #167944;
+}
+
+.product-phone-owner-list b.is-off {
+  color: #b2264d;
+}
+
+.product-phone-owner-list b.is-live {
+  color: #4331c8;
+}
+
+.product-phone-owner-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 8px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.product-phone-owner-actions button {
+  min-height: 28px;
+  border: 1px solid rgba(17, 18, 40, 0.08);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #111322;
+  font-size: 7px;
+  font-weight: var(--weight-bold);
+}
+
+.product-phone-owner-actions button.is-primary {
+  border: 0;
+  color: #fff;
+  background: linear-gradient(120deg, #6551ff, #2e8fff);
+}
+
+.product-phone-guest-stats,
+.product-phone-analytics-kpis,
+.product-phone-plans {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 5px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.product-phone-guest-stats span,
+.product-phone-analytics-kpis span,
+.product-phone-plans span {
+  min-height: 46px;
+  padding: 8px;
+  display: grid;
+  align-content: end;
+  gap: 3px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 8px 18px rgba(35, 31, 75, 0.08);
+}
+
+.product-phone-guest-stats small,
+.product-phone-analytics-kpis small,
+.product-phone-plans small {
+  color: rgba(20, 25, 46, 0.57);
+  font-size: 7px;
+}
+
+.product-phone-guest-stats b,
+.product-phone-analytics-kpis b,
+.product-phone-plans b {
+  color: #4331c8;
+  font-size: 11px;
+  font-weight: var(--weight-bold);
+}
+
+.product-phone-recurring,
+.product-phone-offer {
+  display: grid;
+  gap: 4px;
+  padding: 9px;
+}
+
+.product-phone-recurring {
+  grid-template-columns: 8px 1fr;
+  align-items: center;
+  background: rgba(101, 81, 255, 0.1);
+}
+
+.product-phone-recurring i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #6551ff;
+}
+
+.product-phone-recurring span,
+.product-phone-offer span {
+  color: rgba(20, 25, 46, 0.62);
+  font-size: 7px;
+}
+
+.product-phone-recurring b,
+.product-phone-offer b {
+  color: #4331c8;
+  font-size: 8px;
+  font-weight: var(--weight-bold);
+}
+
+.product-phone-offer small {
+  color: #7562ee;
+  font-size: 6px;
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.product-phone-chart {
+  display: flex;
+  align-items: end;
+  gap: 4px;
+  min-height: 72px;
+  padding: 10px;
+}
+
+.product-phone-chart span {
+  flex: 1;
+  border-radius: 6px 6px 2px 2px;
+  background: linear-gradient(180deg, #978eff, #6551ff);
+  animation: productPhoneLeak 2.8s ease-in-out infinite;
+}
+
+.product-phone-chart span:nth-child(2),
+.product-phone-chart span:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+.product-phone-guest {
+  display: grid;
+  gap: 4px;
+  padding: 9px;
+}
+
+.product-phone-guest span {
+  color: #7562ee;
+  font-size: 6px;
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.product-phone-guest strong {
+  color: #111322;
+  font-size: 13px;
+  font-weight: var(--weight-bold);
+}
+
+.product-phone-guest em {
+  color: rgba(20, 25, 46, 0.57);
+  font-size: 7px;
+  font-style: normal;
+}
+
+.product-phone-guest-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.product-phone-cta {
+  min-height: 31px;
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  background: linear-gradient(120deg, #6551ff, #2e8fff);
+  font-size: 8px;
+  font-weight: var(--weight-bold);
+  animation: productPhoneCta 2.8s ease-in-out infinite;
+}
+
+.product-phone-action {
+  display: grid;
+  grid-template-columns: 8px 1fr auto;
+  align-items: center;
+  gap: 5px;
+  min-height: 31px;
+  padding: 7px 8px;
+  animation: productPhoneAction 3.4s ease-in-out infinite;
+}
+
+.product-phone-action i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #6551ff;
+  box-shadow: 0 0 13px rgba(101, 81, 255, 0.72);
+}
+
+.product-phone-action span {
+  color: rgba(20, 25, 46, 0.57);
+  font-size: 7px;
+}
+
+.product-phone-action b {
+  color: #111322;
+  font-size: 8px;
+  font-weight: var(--weight-bold);
+}
+
+.product-phone-dock {
+  position: absolute !important;
+  right: 0;
+  bottom: 12px;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  pointer-events: none;
+}
+
+.product-phone-dock span {
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(27, 31, 60, 0.18);
+}
+
+.product-phone-dock .is-active {
+  width: 18px;
+  background: #6551ff;
+}
+
+.phone-screen-ui {
+  min-height: 100%;
+  padding: 38px 11px 14px;
+  font-family: var(--font-sans);
+}
+
+@keyframes productMiniappShift {
+  to {
+    background-position: 100% 0;
+  }
+}
+
+@keyframes productPhonePulse {
+  50% {
+    opacity: 0.42;
+    scale: 0.8;
+  }
+}
+
+@keyframes productPhoneLeak {
+  50% {
+    width: 84%;
+  }
+}
+
+@keyframes productPhoneAction {
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes productPhoneCta {
+  50% {
+    box-shadow: 0 14px 32px rgba(75, 70, 205, 0.35);
+  }
+}
+
+@keyframes productCartBreathe {
+  50% {
+    box-shadow: 0 10px 22px rgba(35, 31, 75, 0.15);
+  }
+}
+
+@keyframes productUpsellNudge {
+  50% {
+    transform: translateX(2px);
+  }
+}
+
+@media (max-width: 1024px) {
+  .mobile-section-phone .phone-screen-ui {
+    padding: 40px 10px 13px;
+  }
+}
+
+.product-phone-zone {
+  transition: box-shadow 0.35s ease, transform 0.35s ease;
+}
+
+.product-phone-tap {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-align: inherit;
+  color: inherit;
+  background: transparent;
+  cursor: pointer;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: rgba(101, 81, 255, 0.2);
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.product-phone-tap-block {
+  position: relative;
+  z-index: 4;
+  display: block;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 14px 34px rgba(42, 35, 92, 0.12);
+}
+
+.product-phone-tap-stack {
+  display: grid;
+  gap: 8px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.product-phone-tap.is-tap-hint {
+  animation: productTapHint 2.2s ease-in-out infinite;
+}
+
+.product-phone-tap.is-tap-focused,
+.product-phone-zone.is-highlighted {
+  position: relative;
+  z-index: 3;
+  box-shadow:
+    0 0 0 2px rgba(101, 81, 255, 0.88),
+    0 0 22px rgba(101, 81, 255, 0.38);
+  transform: scale(1.01);
+}
+
+.product-phone-tap.is-tap-visited {
+  animation: none;
+}
+
+.product-phone-miniapp-head.product-phone-zone.is-highlighted,
+.product-phone-tap-block.is-tap-focused .product-phone-miniapp-head {
+  border-radius: 20px 20px 0 0;
+}
+
+.product-phone-stat-tap {
+  min-height: 46px;
+  padding: 8px;
+  display: grid;
+  align-content: end;
+  gap: 3px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 8px 18px rgba(35, 31, 75, 0.08);
+}
+
+.product-phone-stat-static {
+  min-height: 46px;
+  padding: 8px;
+  display: grid;
+  align-content: end;
+  gap: 3px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 8px 18px rgba(35, 31, 75, 0.08);
+}
+
+.product-phone-owner-actions.product-phone-tap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 8px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.product-phone-owner-action {
+  min-height: 28px;
+  padding: 0 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(17, 18, 40, 0.08);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #111322;
+  font-size: 7px;
+  font-weight: var(--weight-bold);
+}
+
+.product-phone-owner-action.is-primary {
+  border: 0;
+  color: #fff;
+  background: linear-gradient(120deg, #6551ff, #2e8fff);
+}
+
+@keyframes productTapHint {
+  50% {
+    box-shadow:
+      0 0 0 2px rgba(101, 81, 255, 0.55),
+      0 0 18px rgba(101, 81, 255, 0.28);
+  }
+}
+
+.product-phone-zone.is-highlighted {
+  position: relative;
+  z-index: 3;
+  box-shadow:
+    0 0 0 2px rgba(101, 81, 255, 0.72),
+    0 0 18px rgba(101, 81, 255, 0.35);
+  transform: scale(1.01);
+}
+
+.product-phone-miniapp-head.product-phone-zone.is-highlighted {
+  border-radius: 20px 20px 0 0;
+}
+
+.product-phone-categories.product-phone-zone.is-highlighted,
+.product-phone-menu-grid.product-phone-zone.is-highlighted {
+  border-radius: 14px;
+}
