@@ -2,7 +2,7 @@ import type { CSSProperties, ReactNode } from "react";
 
 import { mooCta } from "../data/contacts";
 
-type Variant = "hero" | "offer" | "faq" | "header";
+type Variant = "hero" | "offer" | "faq";
 
 type Props = {
   variant: Variant;
@@ -47,7 +47,17 @@ function StartButton({
   );
 }
 
-function DemoBotButton({ className, short = false }: { className?: string; short?: boolean }) {
+function DemoBotButton({
+  className,
+  short = false,
+  hero = false,
+}: {
+  className?: string;
+  short?: boolean;
+  hero?: boolean;
+}) {
+  const label = hero ? mooCta.demoBot.heroLabel : short ? mooCta.demoBot.short : mooCta.demoBot.label;
+
   return (
     <a
       className={`moo-btn-secondary moo-btn-demo-bot${className ? ` ${className}` : ""}`}
@@ -56,16 +66,24 @@ function DemoBotButton({ className, short = false }: { className?: string; short
       target="_blank"
     >
       <TelegramPlane />
-      {short ? mooCta.demoBot.short : mooCta.demoBot.label}
+      {label}
     </a>
   );
 }
 
-function SiteDemoLink({ className }: { className?: string }) {
+function SiteDemoButton({
+  className,
+  pulse = false,
+}: {
+  className?: string;
+  pulse?: boolean;
+}) {
   return (
-    <a className={`moo-cta-ghost${className ? ` ${className}` : ""}`} href={mooCta.demoSite.href}>
+    <a
+      className={`moo-btn-primary${pulse ? " moo-cta-pulse" : ""}${className ? ` ${className}` : ""}`}
+      href={mooCta.demoSite.href}
+    >
       {mooCta.demoSite.label}
-      <span aria-hidden="true">→</span>
     </a>
   );
 }
@@ -105,31 +123,13 @@ function Wrap({
 }
 
 export function MooCtaGroup({ variant, className, revealClass, revealDelay }: Props) {
-  if (variant === "header") {
-    return (
-      <div className={`moo-header-cta-group${className ? ` ${className}` : ""}`}>
-        <a
-          className="moo-header-demo-link"
-          href={mooCta.demoBot.href}
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          <TelegramPlane size={14} />
-          {mooCta.demoBot.short}
-        </a>
-        <StartButton short />
-      </div>
-    );
-  }
-
   if (variant === "hero") {
     return (
       <Wrap className={className} revealClass={revealClass} revealDelay={revealDelay}>
         <div className="moo-cta-row">
-          <StartButton className="moo-hero-primary" pulse />
-          <DemoBotButton className="moo-hero-demo-bot" />
+          <SiteDemoButton className="moo-hero-site-demo" pulse />
+          <DemoBotButton className="moo-hero-demo-bot" hero />
         </div>
-        <SiteDemoLink />
       </Wrap>
     );
   }
@@ -141,7 +141,10 @@ export function MooCtaGroup({ variant, className, revealClass, revealDelay }: Pr
           <StartButton className="moo-offer-primary-btn" pulse />
           <DemoBotButton className="moo-offer-demo-btn" />
         </div>
-        <SiteDemoLink className="moo-cta-ghost--center" />
+        <a className="moo-cta-ghost moo-cta-ghost--center" href={mooCta.demoSite.href}>
+          {mooCta.demoSite.label}
+          <span aria-hidden="true">→</span>
+        </a>
       </Wrap>
     );
   }

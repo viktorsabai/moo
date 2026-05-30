@@ -18,10 +18,11 @@ export const mooCta = {
     href: mooContacts.demoBot,
     label: "Демо-ресторан в Telegram",
     short: "Демо-бот",
+    heroLabel: "Открыть в Telegram",
   },
   demoSite: {
     href: "#demo",
-    label: "Смотреть на сайте",
+    label: "Смотреть демо на сайте",
     short: "На сайте",
   },
   ask: {

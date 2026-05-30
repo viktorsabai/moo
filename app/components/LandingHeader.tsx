@@ -1,8 +1,7 @@
 "use client";
 
+import { HeaderDemoLink, LandingStepperNav } from "./LandingStepperNav";
 import { MooLogo } from "./MooLogo";
-import { LandingScrollProgress } from "./LandingScrollProgress";
-import { MooCtaGroup } from "./MooCtaGroup";
 
 export function LandingHeader() {
   return (
@@ -12,16 +11,10 @@ export function LandingHeader() {
           <MooLogo size={30} withWordmark />
         </a>
 
-        <nav aria-label="Навигация" className="moo-site-nav">
-          <a href="#demo">Демо</a>
-          <a href="#calc">Экономия</a>
-          <a href="#faq">FAQ</a>
-          <a href="#contact">Запуск</a>
-        </nav>
+        <LandingStepperNav />
 
-        <MooCtaGroup variant="header" />
+        <HeaderDemoLink />
       </div>
-      <LandingScrollProgress />
     </header>
   );
 }
